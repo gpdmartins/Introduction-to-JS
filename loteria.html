@@ -1,0 +1,50 @@
+<meta charset="UTF-8">
+<input type="text" id="numero" />
+<input type="submit" value="Adicione um chute!" id="chute" />
+<input type="submit" value="Verificar" id="verificar" />
+<script>
+  var sorteados= [];
+  var chutes = [];
+  var acertos = [];
+  var caixaNumero = document.getElementById("numero");
+  for(var i = 0; i < 6; i++){
+    sorteados[i] = parseInt(Math.random() * 60 + 1);
+  //  document.write(sorteados[i] + " " );
+  }
+  var addChute = function(){
+    for(var i = 0;i<6; i++){
+      if(caixaNumero.value == chutes[i]){
+        alert("Número já chutado!");
+        return;
+
+      }
+    }
+    if(chutes.length == 6){
+      alert("somente 6 chutes!");
+      return;
+    }
+     if(caixaNumero.value > 60 || caixaNumero.value < 1){
+       alert("Somente números entre 1 e 60!");
+       return;
+  }
+chutes.push(caixaNumero.value);
+  }
+  var verifica = function(){
+    for(var i = 0; i < 6 ; i++){
+      for(var j = 0; j < 6 ; j++){
+        if(chutes[i] == sorteados[j]){
+          acertos.push(chutes[i]);
+        }
+    }
+  }
+
+document.write("<br>Sorteados: " + sorteados + "<br>");
+document.write("Chutes " + chutes + "<br>");
+document.write("Você acertou " + acertos.length + " números!");
+document.write("Você tem 1 chance em "+ (60*59*58*57*56*55/(6*5*4*3*2)));
+};
+  var botao = document.getElementById("chute");
+   botao.onclick = addChute;
+   var verifique = document.getElementById("verificar");
+   verifique.onclick = verifica;
+</script>
